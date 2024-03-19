@@ -5,7 +5,6 @@ import { PublicKey, createSignerFromKeypair, none, percentAmount, publicKey, sig
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { fromWeb3JsKeypair, fromWeb3JsPublicKey} from '@metaplex-foundation/umi-web3js-adapters';
 import * as bs58 from "bs58";
-import 'dotenv/config'
 
 const SPL_TOKEN_2022_PROGRAM_ID: PublicKey = publicKey(
     'TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb'
@@ -24,8 +23,8 @@ const INITIALIZE = true;
 
 async function main(){
     console.log("let's name some token-22 tokens in 2024!");
-    const myKeypair = loadWalletKey(process.env.KEYPAIR_FILE || '');
-    let tokenAddres = process.env.TOKEN_ADDRESS || ''
+    const myKeypair = loadWalletKey("miLncvVo2bQpFK8G4dAGpFYfHDGaqWUzYfFAVWXgQM5.json");
+    let tokenAddres = "miL2tTuTfd9nGKDSDcBXsEi1HMu2ANyiMasSnph44tn"
     const mint = new web3.PublicKey(tokenAddres);
     console.log("myKeypair", myKeypair.publicKey.toString())
     console.log("m token", tokenAddres)
@@ -36,9 +35,9 @@ async function main(){
     umi.use(signerIdentity(signer, true))
 
     const ourMetadata = {
-        "name": "Milei Solana",
+        "name": "Milei Di Chan",
         "symbol": "MILEI",
-        "uri": "https://mileisol.com/token22/metadata.json"
+        "uri": "https://mileidi.vercel.app/token22/milei_metadata.json"
       }
       
     console.log("asdasd", ourMetadata)
@@ -68,7 +67,6 @@ async function main(){
             decimals: none<number>(),
             printSupply: none<PrintSupply>(),
         }
-        console.log("umi, {...accounts, ...data",  accounts, data)
         const txid = await createV1(umi, {...accounts, ...data}).sendAndConfirm(umi);
         console.log(bs58.encode(txid.signature))
     } else {
